@@ -21,7 +21,7 @@ from starlette.staticfiles import StaticFiles
 model_config_name = 'app/models/model.config'
 model_file_name = 'app/models/best_model.h5'
 
-classes = ['0', '1', '2', '3']
+classes = ['German Sausage', 'hot dog', ' Taiwan sausage', 'Xin Xin Intestine']
 path = Path(__file__).parent
 img_size = 224
 app = Starlette()
@@ -88,7 +88,7 @@ async def analyze(request):
     img = preprocess_input( np.array([img]) )
     predictions = learn.predict(img)  
     prediction = predictions.argmax()
-    return JSONResponse({'result': str(prediction)})
+    return JSONResponse({'result': str(class[prediction])})
 
 
 if __name__ == '__main__':
